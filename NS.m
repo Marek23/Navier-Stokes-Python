@@ -1,9 +1,7 @@
 clear; close all;
 
 %% nazwa wmalowywanego obrazu
-test    = 'test';
-imgName = [test '.png'];
-resName = 'output.png';
+imgName = 'test.png';
 
 %% pomocnicze nazwy plików (nie trzeba zmienia?)
 maskName  = 'mask.png';
@@ -19,9 +17,11 @@ imwrite(~maska, maskName);
 
 %% Navier Stokes
 tic
+resName = 'output.png';
 cmd = sprintf('python %s %s %s %s', 'inpaint.py', imgName, maskName, resName);
 system(cmd)
 ts = toc;
 
 I = imread(resName);
-imwrite(I, ['C:\Users\Marek\Desktop\Inpainting\Navier-Stokes-Python\OutputNSPython\' 't_' num2str(ts) '_' test '.png']);
+imshow(I);
+imwrite(I, ['output' 't_' num2str(ts) '.png']);
